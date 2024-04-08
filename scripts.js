@@ -20,18 +20,20 @@
 
 
 const BTS_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/BTS_logo_%282017%29.png/600px-BTS_logo_%282017%29.png?20180426223105";
-const TWICE_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Logo_of_TWICE.svg/1200px-Logo_of_TWICE.svg.png";
-const NEWJEANS_URL = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/39bb76f9-7802-420d-85a9-bda352c5568f/dgo2prq-c334e8d1-622b-4f24-afe9-c9f9aa059f07.png/v1/fill/w_894,h_894/new_jeans_logo_test_by_akumazuu_dgo2prq-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzM5YmI3NmY5LTc4MDItNDIwZC04NWE5LWJkYTM1MmM1NTY4ZlwvZGdvMnBycS1jMzM0ZThkMS02MjJiLTRmMjQtYWZlOS1jOWY5YWEwNTlmMDcucG5nIiwid2lkdGgiOiI8PTEwODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.g2_PJ0TcoYJxGyn_gi6MZeOFHQ10PoAIvGzoTZjUwBE";
+const TWICE_URL = "https://pbs.twimg.com/profile_images/1176061001109651456/bR9bAVY3_400x400.jpg";
+const NEWJEANS_URL = "https://i.pinimg.com/736x/4c/d0/41/4cd041f49b56d42467e6f8c1bdd79bed.jpg";
 const LESS_URL = "https://content.momentica.com/1526a225-1a8e-47c8-85c9-0632cce7399e";
 
 // This is an array of strings 
+// Changed to array of array containing [title, img link]
 let titles = [
-    "BTS",
-    "TWICE",
-    "NEWJEANS", 
-    "LE SSERAFIM"
+    ["BTS","https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/BTS_logo_%282017%29.png/600px-BTS_logo_%282017%29.png?20180426223105"],
+    ["TWICE", "https://pbs.twimg.com/profile_images/1176061001109651456/bR9bAVY3_400x400.jpg"],
+    ["NEWJEANS", "https://i.pinimg.com/736x/4c/d0/41/4cd041f49b56d42467e6f8c1bdd79bed.jpg"], 
+    ["LE SSERAFIM", "https://content.momentica.com/1526a225-1a8e-47c8-85c9-0632cce7399e"]
 ];
 
+let deleted = [];
 
 // you should use more than just an array of strings to store it all.
 
@@ -42,12 +44,15 @@ function showCards() {
     const templateCard = document.querySelector(".card");
     
     for (let i = 0; i < titles.length; i++) {
-        let title = titles[i];
+        let title = titles[i][0];
+        let imageURL = "";
+        imageURL = titles[i][1];
 
         // This part of the code doesn't scale very well! After you add your
         // own data, you'll need to do something totally different here.
-        let imageURL = "";
-        if (i == 0) {
+
+        //original code
+        /*if (i == 0) {
             imageURL = BTS_URL;
         } else if (i == 1) {
             imageURL = TWICE_URL;
@@ -55,7 +60,7 @@ function showCards() {
             imageURL = NEWJEANS_URL;
         } else if (i == 3) {
             imageURL = LESS_URL;
-        }
+        }*/
         
         const nextCard = templateCard.cloneNode(true); // Copy the template card
         editCardContent(nextCard, title, imageURL); // Edit title and image
@@ -89,6 +94,50 @@ function quoteAlert() {
 }
 
 function removeLastCard() {
+    deleted.push(titles[titles.length - 1]);
     titles.pop(); // Remove last item in titles array
     showCards(); // Call showCards again to refresh
+}
+
+function alphabeticalOrder() {
+    let temp = [];
+    for (let i = 0; i < titles.length; i++){
+        temp.push(titles[i]);
+    }
+    let alphabetical = titles;
+    alphabetical = alphabetical.sort((a, b) => a[0].localeCompare(b[0]));
+    titles = alphabetical;
+    showCards();
+    for (let i = 0; i < titles.length; i++){
+        titles[i] = temp[i];
+    }
+    // for (let i = 0; i < titles.length; i++){
+    //     console.log(titles[i][0]);
+    // }
+    // temp = [];
+}
+
+function addCard(){
+    // group ex: Aespa
+    // link ex: https://i.pinimg.com/474x/14/7b/36/147b36a3860593605909d896ca023a92.jpg
+    let group = prompt("Enter a Group Name");
+    let link = prompt("Enter a link for their photo");
+    titles.push([group, link]);
+    showCards();
+}
+
+//revert card container back to original state
+function revert(){
+    while (titles.length > 4){
+        titles.pop();
+    }
+    for (let i = 0; i < titles.length + 1; i++) {
+        if (titles.length != 4){
+            titles.push(deleted[deleted.length-1-i]);
+        } else {
+            deleted = [];
+            break;
+        }
+    }
+    showCards();
 }
