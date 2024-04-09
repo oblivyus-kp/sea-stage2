@@ -1,31 +1,10 @@
 /**
- * Data Catalog Project Starter Code - SEA Stage 2
- * 
- * The comments in this file are only to help you learn how the starter code
- * works. The instructions for the project are in the README. That said, here
- * are the three things you should do first to learn about the starter code:
- * - 1 - Change something small in index.html or style.css, then reload your 
- *    browser and make sure you can see that change. 
- * - 2 - On your browser, right click anywhere on the page and select
- *    "Inspect" to open the browser developer tools. Then, go to the "console"
- *    tab in the new window that opened up. This console is where you will see
- *    JavaScript errors and logs, which is extremely helpful for debugging.
- *    (These instructions assume you're using Chrome, opening developer tools
- *    may be different on other browsers. We suggest using Chrome.)
- * - 3 - Add another string to the titles array a few lines down. Reload your
- *    browser and observe what happens. You should see a fourth "card" appear
- *    with the string you added to the array, but a broken image.
- * 
- */
+ * Data Catalog Project - KENNY PHAM
+**/
 
 
-const BTS_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/BTS_logo_%282017%29.png/600px-BTS_logo_%282017%29.png?20180426223105";
-const TWICE_URL = "https://pbs.twimg.com/profile_images/1176061001109651456/bR9bAVY3_400x400.jpg";
-const NEWJEANS_URL = "https://i.pinimg.com/736x/4c/d0/41/4cd041f49b56d42467e6f8c1bdd79bed.jpg";
-const LESS_URL = "https://content.momentica.com/1526a225-1a8e-47c8-85c9-0632cce7399e";
-
-// This is an array of strings 
-// Changed to array of array containing [title, img link, price]
+// DATA
+// Array of arrays containing [title, img link, price]
 let titles = [
     ["BTS","https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/BTS_logo_%282017%29.png/600px-BTS_logo_%282017%29.png?20180426223105", 250],
     ["TWICE", "https://i.pinimg.com/originals/35/70/51/357051d292c92266ecbe9274052b0814.png", 150],
@@ -37,7 +16,6 @@ let titles = [
 
 let deleted = []; //keeps track of removed cards to redisplay later
 
-// you should use more than just an array of strings to store it all.
 
 // This function adds cards the page to display the data in the array
 function showCards() {
@@ -52,20 +30,6 @@ function showCards() {
         let imageURL = "";
         imageURL = titles[i][1];
         let price =  titles[i][2];
-
-        // This part of the code doesn't scale very well! After you add your
-        // own data, you'll need to do something totally different here.
-
-        //original code
-        /*if (i == 0) {
-            imageURL = BTS_URL;
-        } else if (i == 1) {
-            imageURL = TWICE_URL;
-        } else if (i == 2) {
-            imageURL = NEWJEANS_URL;
-        } else if (i == 3) {
-            imageURL = LESS_URL;
-        }*/
         
         const nextCard = templateCard.cloneNode(true); // Copy the template card
         editCardContent(nextCard, title, imageURL, price);
@@ -87,17 +51,11 @@ function editCardContent(card, newTitle, newImageURL, price) {
 
     const cardPrice = card.querySelector(".price");
     cardPrice.textContent = "Starting at $" + price;
-
-    // You can use console.log to help you debug!
-    // View the output by right clicking on your website,
-    // select "Inspect", then click on the "Console" tab
-    //console.log("new card:", newTitle, "- html: ", card);
 }
 
 document.addEventListener("DOMContentLoaded", showCards);
 
 function quoteAlert() {
-    //console.log("Button Clicked!")
     alert("PARTY PARTY YEAH!!!!!!!");
 }
 
@@ -119,10 +77,6 @@ function alphabeticalOrder() {
     for (let i = 0; i < titles.length; i++){
         titles[i] = temp[i];
     }
-    // for (let i = 0; i < titles.length; i++){
-    //     console.log(titles[i][0]);
-    // }
-    // temp = [];
 }
 
 function addCard(){ // adds a new card to the page
@@ -159,6 +113,8 @@ function titleName(){
     }
 }
 
+
+//Search Bar
 const searchInput = document.querySelector("[data-search]");
 searchInput.addEventListener("input", (e) => {
     const value = e.target.value.toLowerCase();
