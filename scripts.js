@@ -55,8 +55,32 @@ function editCardContent(card, newTitle, newImageURL, price) {
 
 document.addEventListener("DOMContentLoaded", showCards);
 
-function quoteAlert() {
-    alert("PARTY PARTY YEAH!!!!!!!");
+function priceSort1() {
+    let temp = [];
+    for (let i = 0; i < titles.length; i++){
+        temp.push(titles[i]);
+    }
+    let alphabetical = titles;
+    alphabetical.sort((a, b) => b[2] - a[2]); //sorts array by the third element of price (high to low)
+    titles = alphabetical;
+    showCards();
+    for (let i = 0; i < titles.length; i++){
+        titles[i] = temp[i];
+    }
+}
+
+function priceSort2() {
+    let temp = [];
+    for (let i = 0; i < titles.length; i++){
+        temp.push(titles[i]);
+    }
+    let alphabetical = titles;
+    alphabetical.sort((a, b) => a[2] - b[2]); //sorts array by the third element of price (low to high)
+    titles = alphabetical;
+    showCards();
+    for (let i = 0; i < titles.length; i++){
+        titles[i] = temp[i];
+    }
 }
 
 function removeLastCard() {
@@ -71,7 +95,7 @@ function alphabeticalOrder() {
         temp.push(titles[i]);
     }
     let alphabetical = titles;
-    alphabetical = alphabetical.sort((a, b) => a[0].localeCompare(b[0]));
+    alphabetical = alphabetical.sort((a, b) => a[0].localeCompare(b[0])); //sorts the array alphabetically by first element of name
     titles = alphabetical;
     showCards();
     for (let i = 0; i < titles.length; i++){
@@ -80,7 +104,7 @@ function alphabeticalOrder() {
 }
 
 function addCard(){ // adds a new card to the page
-    // group ex: Aespa
+    // group example name: Aespa
     // link ex: https://i.pinimg.com/474x/14/7b/36/147b36a3860593605909d896ca023a92.jpg
     let group = prompt("Enter a Group Name");
     let link = prompt("Enter a link for their photo");
@@ -118,7 +142,7 @@ function titleName(){
 const searchInput = document.querySelector("[data-search]");
 searchInput.addEventListener("input", (e) => {
     const value = e.target.value.toLowerCase();
-    console.log(value);
+    //console.log(value);
     const cardContainer = document.getElementById("card-container");
     const cards = cardContainer.children; // Get all card elements
     for (let i = 0; i < cards.length; i++) {

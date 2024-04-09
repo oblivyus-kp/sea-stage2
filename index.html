@@ -11,30 +11,38 @@
 <body>
     <header class="main-header">
         <h1 class="title">KPOP Central</h1>
+        <div class="searchwrapper">
+            <input type = "search" id = "search" placeholder="Search" data-search>
+            <img src="https://cdn2.iconfinder.com/data/icons/clean-simple/75/search-512.png" alt="Search Icon" class = "searchicon">
+        </div>
+    </header>
+    <div class = "container">
         <div class = "manip">
-            <div class="searchwrapper">
-                <input type = "search" id = "search" placeholder="Search for a Group..." data-search>
-            </div>
             <div class="buttons">
                 <button onclick="revert();">
-                    Revert!
+                    Revert
                 </button>
                 <button onclick="addCard();">
-                    Add A Card!
+                    Add Card
                 </button>
                 <button onclick="removeLastCard();">
-                    Remove A Card!
+                    Remove Item
                 </button>
                 <button onclick="alphabeticalOrder();">
-                    Alphabetical Order!
+                    Alphabetical Order
                 </button>
-                <button onclick="quoteAlert();">
-                    Get A Quote!
+                <button onclick="priceSort1();">
+                    Sort By Price
+                    <div>(High to Low)</div>
+                </button>
+                <button onclick="priceSort2();">
+                    Sort By Price
+                    <div>(Low to High)</div>
                 </button>
             </div>
         </div>
-    </header>
-    <div id="card-container">
+        <div id="card-container">
+        </div>
     </div>
     <div class="card" style="display: none;">
         <div class="card-content">
