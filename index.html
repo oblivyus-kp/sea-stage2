@@ -2,18 +2,39 @@
 <html>
 
 <head>
-    <title>KPop Concerts | Home</title>
+    <title>KPop Central | Concerts</title>
     <meta name="description" content="A Catalog of Shows Set in Los Angeles">
     <link rel="stylesheet" href="style.css" />
-    <script type="text/javascript" src="scripts.js"></script>
+    <script type="text/javascript" src="scripts.js" defer></script>
 </head>
 
 <body>
     <header class="main-header">
-        <h1 class="title">KPop Concerts</h1>
+        <h1 class="title">KPOP Central</h1>
+        <div class = "manip">
+            <div class="searchwrapper">
+                <input type = "search" id = "search" placeholder="Search for a Group..." data-search>
+            </div>
+            <div class="buttons">
+                <button onclick="revert();">
+                    Revert!
+                </button>
+                <button onclick="addCard();">
+                    Add A Card!
+                </button>
+                <button onclick="removeLastCard();">
+                    Remove A Card!
+                </button>
+                <button onclick="alphabeticalOrder();">
+                    Alphabetical Order!
+                </button>
+                <button onclick="quoteAlert();">
+                    Get A Quote!
+                </button>
+            </div>
+        </div>
     </header>
     <div id="card-container">
-        
     </div>
     <div class="card" style="display: none;">
         <div class="card-content">
@@ -23,7 +44,7 @@
             <div class = "starts">⭐⭐⭐⭐⭐</div>
         </div>
     </div>
-    <div class="footer">
+    <!-- <div class="footer">
         <button onclick="revert();">
             Revert!
         </button>
@@ -39,7 +60,7 @@
         <button onclick="alphabeticalOrder();">
             Alphabetical Order!
         </button>
-    </div>
+    </div> -->
 </body>
 
 </html>
